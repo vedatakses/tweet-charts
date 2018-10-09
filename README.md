@@ -1,7 +1,9 @@
 # tweet-charts
 Social Data Analyses with Twitter Data
 
-This project is the backend service of tweet-charts implemented using Spring Boot.
+>**tweet-charts** is the backend service implemented using Spring Boot.
+
+>**tweet-charts-ui** is the frontend service as the name implies implemented using Angular.
 
 ## APIs
 
