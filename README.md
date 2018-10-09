@@ -21,8 +21,8 @@ Following response generates the follower and tweet counts in dashboard.
 
 Following response generates the followers and tweets charts in dashboard.
 
+**GET last 10 (max) user profile by username and timestamp**
 ```json
-**GET last 10 (max) user profile by username**
 [
     {
         "timestamp": 1539120695,
