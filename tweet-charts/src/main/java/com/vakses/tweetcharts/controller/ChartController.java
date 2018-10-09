@@ -1,6 +1,6 @@
 package com.vakses.tweetcharts.controller;
 
-import com.vakses.tweetcharts.model.UserProfile;
+import com.vakses.tweetcharts.model.entity.UserProfile;
 import com.vakses.tweetcharts.service.TwitterClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/charts")
+@RequestMapping("/charts")
 public class ChartController {
 
     private TwitterClient twitterClient;
@@ -26,8 +26,13 @@ public class ChartController {
         this.twitterClient = twitterClient;
     }
 
-    @GetMapping(value = "/{user}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/profile/{user}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<UserProfile> getUserProfile(@PathVariable final String user) {
         return ResponseEntity.ok(twitterClient.getUserProfile(user));
+    }
+
+    @GetMapping(value = "/counts/{user}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity getLast10UserProfile(@PathVariable final String user) {
+        return ResponseEntity.ok(twitterClient.getUserProfilesByTime(user));
     }
 }
