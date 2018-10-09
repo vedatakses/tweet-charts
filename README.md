@@ -9,7 +9,7 @@ Social Data Analyses with Twitter Data
 
 Following response generates the follower and tweet counts in dashboard.
 
-**GET user profile by username**
+**GET user profile by username:**
 ```json
 {
     "timestamp": 1539121639,
@@ -21,7 +21,7 @@ Following response generates the follower and tweet counts in dashboard.
 
 Following response generates the followers and tweets charts in dashboard.
 
-**GET last 10 (max) user profile by username and timestamp**
+**GET last 10 (max) user profile by username and timestamp:**
 ```json
 [
     {
