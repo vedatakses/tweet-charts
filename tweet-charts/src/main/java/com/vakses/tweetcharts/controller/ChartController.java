@@ -1,6 +1,6 @@
 package com.vakses.tweetcharts.controller;
 
-import com.vakses.tweetcharts.model.entity.UserProfile;
+import com.vakses.tweetcharts.model.UserProfile;
 import com.vakses.tweetcharts.service.TwitterClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

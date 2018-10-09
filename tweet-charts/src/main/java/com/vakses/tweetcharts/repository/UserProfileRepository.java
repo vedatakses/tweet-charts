@@ -1,6 +1,6 @@
 package com.vakses.tweetcharts.repository;
 
-import com.vakses.tweetcharts.model.entity.UserProfile;
+import com.vakses.tweetcharts.model.UserProfile;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

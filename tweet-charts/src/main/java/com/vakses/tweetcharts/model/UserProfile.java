@@ -1,6 +1,8 @@
-package com.vakses.tweetcharts.model.entity;
+package com.vakses.tweetcharts.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,28 +15,24 @@ import javax.persistence.Table;
  */
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "user_profile")
 public class UserProfile {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private long id;
+
     private long timestamp;
     private String username;
     private int tweetCount;
     private int followerCount;
-
-    public UserProfile() {
-
-    }
 
     public UserProfile(long timestamp, String username, int tweetCount, int followerCount) {
         this.timestamp = timestamp;
         this.username = username;
         this.tweetCount = tweetCount;
         this.followerCount = followerCount;
-    }
-
-    public long getId() {
-        return id;
     }
 }
