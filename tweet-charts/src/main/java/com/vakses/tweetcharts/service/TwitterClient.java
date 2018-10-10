@@ -22,11 +22,13 @@ import java.util.List;
 public class TwitterClient {
 
     private Twitter twitter;
+    private DeepAIClient deepAIClient;
     private UserProfileRepository userProfileRepository;
 
     @Autowired
-    public TwitterClient(final Twitter twitter, final UserProfileRepository userProfileRepository) {
+    public TwitterClient(final Twitter twitter, final DeepAIClient deepAIClient, final UserProfileRepository userProfileRepository) {
         this.twitter = twitter;
+        this.deepAIClient = deepAIClient;
         this.userProfileRepository = userProfileRepository;
     }
 
