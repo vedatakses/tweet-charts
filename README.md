@@ -49,6 +49,8 @@ Following response generates the followers and tweets charts in dashboard.
 
 As a sentiment analyses support - 3rd party provider DeepAI is used.
 
+DeepAI provides 1000 credits (request) per month for free.
+
 **Example Request:**\
 curl --request POST \
   --url https://api.deepai.org/api/sentiment-analysis \
