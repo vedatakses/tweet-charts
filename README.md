@@ -44,3 +44,26 @@ Following response generates the followers and tweets charts in dashboard.
     }
 ]
 ```
+
+## Sentiment Analysis for Tweets
+
+As a sentiment analyses support - 3rd party provider DeepAI is used.
+
+**Example Request:**\
+curl --request POST \
+  --url https://api.deepai.org/api/sentiment-analysis \
+  --header 'api-key: xxxx' \
+  --header 'content-type: multipart/form-data;
+  --form 'text=What a great day.'
+
+**Example Response:**\
+```json
+{
+    "output": [
+        "Positive"
+    ]
+}
+```
+
+**More informations can be found from the following link:**\
+https://deepai.org/api-docs/#sentiment-analysis
