@@ -56,7 +56,7 @@ curl --request POST \
   --url https://api.deepai.org/api/sentiment-analysis \
   --header 'api-key: xxxx' \
   --header 'content-type: multipart/form-data;
-  --form 'text=What a great day.'
+  --form 'text=What a great day!'
 
 **Example Response:**\
 ```json
