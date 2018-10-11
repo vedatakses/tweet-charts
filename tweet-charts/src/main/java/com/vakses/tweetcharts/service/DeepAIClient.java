@@ -36,8 +36,11 @@ public class DeepAIClient {
     public SentimentResponse getSentimentsFromTweets(List<String> tweets) {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<MultiValueMap<String, String>> request = preparePostRequest(tweets);
-        ResponseEntity<SentimentResponse> responseEntity = restTemplate.postForEntity(SENTIMENT_ANALYSIS_URL, request, SentimentResponse.class);
-        log.info("sentiments response status: {}", responseEntity.getStatusCodeValue());
+        log.info("requesting sentiments for {} tweets", tweets.size());
+        ResponseEntity<SentimentResponse> responseEntity =
+                restTemplate.postForEntity(SENTIMENT_ANALYSIS_URL, request, SentimentResponse.class);
+        log.info("sentiment response status: {} and contains {} sentiments", responseEntity.getStatusCodeValue(),
+                responseEntity.getBody().getOutput().size());
         return responseEntity.getBody();
     }
 
@@ -45,12 +48,22 @@ public class DeepAIClient {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Api-Key", API_KEY);
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        tweets.forEach(tweet -> {
-            // TODO: make sure punctuation mark and one space is added before next tweet
-            map.add("text", tweet);
-        });
+        map.add("text", createRequestTextFromTweets(tweets));
         return new HttpEntity<>(map, headers);
+    }
+
+    private String createRequestTextFromTweets(final List<String> tweets) {
+        String text = "";
+        for (String tweet : tweets) {
+            String clearTweet = tweet.trim();
+            final String lastCharacterAsString = String.valueOf(clearTweet.charAt(clearTweet.length() - 1));
+            final boolean isEndingWithPunctuation = lastCharacterAsString.matches(".*\\p{Punct}");
+            if (!isEndingWithPunctuation) {
+                clearTweet += ".";
+            }
+            text += clearTweet + " ";
+        }
+        return text.trim();
     }
 }
