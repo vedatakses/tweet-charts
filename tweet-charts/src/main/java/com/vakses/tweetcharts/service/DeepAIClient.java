@@ -8,11 +8,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.social.twitter.api.Tweet;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,13 +29,16 @@ public class DeepAIClient {
     private static final String SENTIMENT_ANALYSIS_URL = "https://api.deepai.org/api/sentiment-analysis";
 
     private final String API_KEY;
+    private TwitterClient twitterClient;
 
     @Autowired
-    public DeepAIClient(Environment environment) {
+    public DeepAIClient(Environment environment, TwitterClient twitterClient) {
         API_KEY = environment.getProperty("deep-ai.apiKey");
+        this.twitterClient = twitterClient;
     }
 
-    public SentimentResponse getSentimentsFromTweets(List<String> tweets) {
+    public SentimentResponse getSentiments(final String user) {
+        List<String> tweets = findLastTweets(user);
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<MultiValueMap<String, String>> request = preparePostRequest(tweets);
         log.info("requesting sentiments for {} tweets", tweets.size());
@@ -44,7 +49,17 @@ public class DeepAIClient {
         return responseEntity.getBody();
     }
 
-    private HttpEntity<MultiValueMap<String, String>> preparePostRequest(List<String> tweets) {
+    private List<String> findLastTweets(final String user) {
+        List<String> tweets = new ArrayList<>();
+        List<Tweet> mentionedTweets = twitterClient.getLastMentionedTweets(user);
+
+        mentionedTweets.stream().filter(tweet -> !tweet.isRetweet()
+                && !tweet.getText().contains("RT") && tweets.size() < 10)
+                .forEach(tweet -> tweets.add(tweet.getText()));
+        return tweets;
+    }
+
+    private HttpEntity<MultiValueMap<String, String>> preparePostRequest(final List<String> tweets) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Api-Key", API_KEY);
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);

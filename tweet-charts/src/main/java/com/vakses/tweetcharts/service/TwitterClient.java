@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.social.twitter.api.SearchParameters;
+import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,13 +25,11 @@ import java.util.List;
 public class TwitterClient {
 
     private Twitter twitter;
-    private DeepAIClient deepAIClient;
     private UserProfileRepository userProfileRepository;
 
     @Autowired
-    public TwitterClient(final Twitter twitter, final DeepAIClient deepAIClient, final UserProfileRepository userProfileRepository) {
+    public TwitterClient(final Twitter twitter, final UserProfileRepository userProfileRepository) {
         this.twitter = twitter;
-        this.deepAIClient = deepAIClient;
         this.userProfileRepository = userProfileRepository;
     }
 
@@ -47,5 +48,36 @@ public class TwitterClient {
         log.info("Retrieving last 10 followers for '@{}' by time", username);
         Pageable pageable = new PageRequest(0, 10, Sort.Direction.DESC, "id");
         return userProfileRepository.findTop10ByUsername(username, pageable);
+    }
+
+    public List<Tweet> getLastMentionedTweets(final String mention) {
+        log.info("Retrieving last tweets that @{} mentioned", mention);
+        final SearchParameters searchParameters = new SearchParameters("@" + mention).locale("en").lang("en");
+        return twitter.searchOperations().search(searchParameters).getTweets();
+    }
+
+    public List<String> getLastLocationsOfMentions(final String user) {
+        log.info("Retrieving locations of {} mentions", user);
+        final List<String> locations = new ArrayList<>();
+        final List<Tweet> tweets = getLastMentionedTweets(user);
+        for (Tweet tweet : tweets) {
+            if (!tweet.isRetweet() && !tweet.getText().contains("RT")) {
+                String location = tweet.getUser().getLocation();
+                if (location != null && !location.isEmpty()) {
+                    final String clearLocation = location.substring(0, 1).toUpperCase() + location.substring(1);
+                    clearLocation.replaceAll("[^\\p{Alpha}]", "");
+                    int indexOfComma = clearLocation.indexOf(",");
+                    if (clearLocation.length() > 2) {
+                        if (indexOfComma != -1) {
+                            locations.add(clearLocation.substring(0, indexOfComma));
+                        } else {
+                            locations.add(clearLocation);
+                        }
+                    }
+                }
+            }
+        }
+        log.info("Total of {} locations detected", locations.size());
+        return locations;
     }
 }
