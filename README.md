@@ -45,6 +45,49 @@ Following response generates the followers and tweets charts in dashboard.
 ]
 ```
 
+**GET last 10 (max) sentiments of user mentions:**
+```json
+{
+    "output": [
+        "Positive",
+        "Neutral",
+        "Negative",
+        "Negative",
+        "Negative",
+        "Neutral",
+        "Negative",
+        "Neutral",
+        "Positive",
+        "Negative"
+    ]
+}
+```
+
+**GET last 50 (max) locations of user mentions:**\
+(not filtering unreal ones)
+```json
+[
+    "Wisconsin",
+    "Rome",
+    "Paradise",
+    "Wisconsin",
+    "United States",
+    "San Francisco",
+    "Wisconsin",
+    "Newcastle upon tyne",
+    "San Francisco",
+    "Malaga",
+    "Slovenia",
+    "Los Angeles",
+    "Walterboro",
+    "Wisconsin",
+    "Windy City",
+    "Moscow",
+    "Leesburg",
+    "Baltimore"
+]
+```
+
 ## Sentiment Analysis for Tweets
 
 As a sentiment analyses support - 3rd party provider DeepAI is used.
@@ -58,7 +101,7 @@ curl --request POST \
   --header 'content-type: multipart/form-data;
   --form 'text=What a great day!'
 
-**Example Response:**\
+**Example Response:**
 ```json
 {
     "output": [
