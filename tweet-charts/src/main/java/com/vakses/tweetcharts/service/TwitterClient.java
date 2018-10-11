@@ -64,20 +64,28 @@ public class TwitterClient {
             if (!tweet.isRetweet() && !tweet.getText().contains("RT")) {
                 String location = tweet.getUser().getLocation();
                 if (location != null && !location.isEmpty()) {
-                    final String clearLocation = location.substring(0, 1).toUpperCase() + location.substring(1);
-                    clearLocation.replaceAll("[^\\p{Alpha}]", "");
-                    int indexOfComma = clearLocation.indexOf(",");
-                    if (clearLocation.length() > 2) {
-                        if (indexOfComma != -1) {
-                            locations.add(clearLocation.substring(0, indexOfComma));
-                        } else {
-                            locations.add(clearLocation);
-                        }
+                    final String filteredLocation = getFilteredLocation(location);
+                    if (!filteredLocation.isEmpty()) {
+                        locations.add(filteredLocation);
                     }
                 }
             }
         }
         log.info("Total of {} locations detected", locations.size());
         return locations;
+    }
+
+    private String getFilteredLocation(String location) {
+        final String clearLocation = location.substring(0, 1).toUpperCase() + location.substring(1);
+        clearLocation.replaceAll("[^\\p{Alpha}]", "");
+        int indexOfComma = clearLocation.indexOf(",");
+        if (clearLocation.length() < 2) {
+            if (indexOfComma != -1) {
+                location = clearLocation.substring(0, indexOfComma);
+            } else {
+                location = clearLocation;
+            }
+        }
+        return location;
     }
 }
