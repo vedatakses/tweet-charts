@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.social.twitter.api.OEmbedTweet;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,5 +51,10 @@ public class ChartController {
     @GetMapping(value = "/locations/{user}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<List<String>> getMentionsLocations(@PathVariable final String user) {
         return ResponseEntity.ok(twitterClient.getLastLocationsOfMentions(user));
+    }
+
+    @GetMapping(value = "/oembed/{user}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<OEmbedTweet> getLastMentionAsEmbeddedTweet(@PathVariable final String user) {
+        return ResponseEntity.ok(twitterClient.getLastMentionAsEmbeddedTweet(user));
     }
 }
