@@ -88,6 +88,30 @@ Following response generates the followers and tweets charts in dashboard.
 ]
 ```
 
+**GET oembed link of last mention:**\
+(the html in response should be used to embed the tweet to web site)
+
+```json
+{
+    "extraData": {},
+    "type": "rich",
+    "version": "1.0",
+    "authorName": "Jassim Al-Kanani",
+    "authorUrl": "https://twitter.com/Jassimalkanani",
+    "providerName": "Twitter",
+    "providerUrl": "https://twitter.com",
+    "cacheAge": 3153600000,
+    "height": null,
+    "width": 400,
+    "html": "<blockquote class=\"twitter-tweet\" data-width=\"400\"><p lang=\"en\" dir=\"ltr\">Mmmm designer goods on <a            href=\"https://twitter.com/amazon?ref_src=twsrc%5Etfw\">@amazon</a></p>&mdash; Jassim Al-Kanani (@Jassimalkanani) <a          href=\"https://twitter.com/Jassimalkanani/status/1050783998560088066?ref_src=twsrc%5Etfw\">October 12, 2018</a> 
+     </blockquote>\n<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>\n",
+    "url": "https://twitter.com/Jassimalkanani/status/1050783998560088066"
+}
+```
+**For more information:**\
+https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-oembed
+
+
 ## Sentiment Analysis for Tweets
 
 As a sentiment analyses support - 3rd party provider DeepAI is used.
@@ -110,5 +134,5 @@ curl --request POST \
 }
 ```
 
-**More informations can be found from the following link:**\
+**For more information:**\
 https://deepai.org/api-docs/#sentiment-analysis
