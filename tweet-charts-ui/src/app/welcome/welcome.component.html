@@ -1,14 +1,17 @@
-<mat-toolbar class="welcome-toolbar">
-  <mat-toolbar-row class="welcome-toolbar-row">
-    <span class="welcome-text">Tweets to Charts</span>
-  </mat-toolbar-row>
-</mat-toolbar>
+<div class="d-welcome">
+  <mat-toolbar class="welcome-toolbar">
+    <mat-toolbar-row class="welcome-toolbar-row">
+      <span class="welcome-text">Tweets to Charts</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-<form class="welcome-form">
-  <mat-form-field class="welcome-full-width">
-    <textarea matInput placeholder="Enter twitter account name"></textarea>
-  </mat-form-field>
-  <div class="welcome-search-div">
-    <button mat-stroked-button class="welcome-search-button">Search</button>
-  </div>
-</form>
+  <form class="welcome-form">
+    <mat-form-field class="welcome-full-width">
+      <textarea matInput placeholder="Enter twitter account name" #user></textarea>
+    </mat-form-field>
+    <div class="welcome-search-div">
+      <button mat-stroked-button class="welcome-search-button" 
+        type="submit" (click)='createCharts(user.value)'>Search</button>
+    </div>
+  </form>
+</div>
