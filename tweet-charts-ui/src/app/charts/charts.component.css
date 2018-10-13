@@ -1,0 +1,26 @@
+.charts-toolbar {
+    background-color: #221F1F;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    min-height: 30px;
+}
+
+.charts-toolbar-row {
+    color: whitesmoke;
+    position: fixed;
+    align-self: center;
+    font-family: inherit;
+    font-size: 13px;
+    height: 30px;
+}
+
+.charts-user {
+    color: whitesmoke;
+    position: fixed;
+    right: 1%;
+    font-family: inherit;
+    font-size: 13px;
+    height: 30px;
+}
