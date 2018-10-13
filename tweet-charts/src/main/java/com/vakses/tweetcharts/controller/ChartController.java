@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -34,27 +35,27 @@ public class ChartController {
     }
 
     @GetMapping(value = "/profile/{user}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<UserProfile> getUserProfile(@PathVariable final String user) {
-        return ResponseEntity.ok(twitterClient.getUserProfile(user));
+    public ResponseEntity<UserProfile> getUserProfile(@PathVariable @NotNull final String user) {
+        return ResponseEntity.ok(twitterClient.getUserProfile(user.toLowerCase()));
     }
 
     @GetMapping(value = "/counts/{user}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity getLast10UserProfile(@PathVariable final String user) {
-        return ResponseEntity.ok(twitterClient.getUserProfilesByTime(user));
+    public ResponseEntity getLast10UserProfile(@PathVariable @NotNull final String user) {
+        return ResponseEntity.ok(twitterClient.getUserProfilesByTime(user.toLowerCase()));
     }
 
     @GetMapping(value = "/sentiments/{user}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<SentimentResponse> getSentiments(@PathVariable final String user) {
-        return ResponseEntity.ok(deepAIClient.getSentiments(user));
+    public ResponseEntity<SentimentResponse> getSentiments(@PathVariable @NotNull final String user) {
+        return ResponseEntity.ok(deepAIClient.getSentiments(user.toLowerCase()));
     }
 
     @GetMapping(value = "/locations/{user}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<String>> getMentionsLocations(@PathVariable final String user) {
-        return ResponseEntity.ok(twitterClient.getLastLocationsOfMentions(user));
+    public ResponseEntity<List<String>> getMentionsLocations(@PathVariable @NotNull final String user) {
+        return ResponseEntity.ok(twitterClient.getLastLocationsOfMentions(user.toLowerCase()));
     }
 
     @GetMapping(value = "/oembed/{user}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<OEmbedTweet> getLastMentionAsEmbeddedTweet(@PathVariable final String user) {
-        return ResponseEntity.ok(twitterClient.getLastMentionAsEmbeddedTweet(user));
+    public ResponseEntity<OEmbedTweet> getLastMentionAsEmbeddedTweet(@PathVariable @NotNull final String user) {
+        return ResponseEntity.ok(twitterClient.getLastMentionAsEmbeddedTweet(user.toLowerCase()));
     }
 }
