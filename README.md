@@ -112,7 +112,7 @@ Following response generates the followers and tweets charts in dashboard.
 https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-oembed
 
 
-## Sentiment Analysis for Tweets
+## Sentiment Analysis on Tweets
 
 As a sentiment analyses support - 3rd party provider DeepAI is used.
 
