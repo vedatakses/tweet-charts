@@ -4,7 +4,7 @@
     top: 0;
     left: 0;
     z-index: 2;
-    width: 100% !important;
+    min-height: 30px;
 }
 
 .welcome-toolbar-row {
@@ -12,7 +12,8 @@
     position: fixed;
     align-self: center;
     font-family: inherit;
-    font-size: 80%;
+    font-size: 13px;
+    height: 30px;
 }
 
 .welcome-form {
