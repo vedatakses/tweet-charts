@@ -1,0 +1,43 @@
+.welcome-toolbar {
+    background-color: #221F1F;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100% !important;
+}
+
+.welcome-toolbar-row {
+    color: whitesmoke;
+    position: fixed;
+    align-self: center;
+    font-family: inherit;
+    font-size: 80%;
+}
+
+.welcome-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .welcome-full-width {
+    width: 100%;
+  }
+
+  .welcome-search-div {
+    max-width: 500px;
+  }
+
+  .welcome-search-button {
+    width: 500px;
+    background-color: white;
+    color: #221F1F;
+    font-family: inherit;
+    font-size: 120%;
+    font-style: unset;
+  }
