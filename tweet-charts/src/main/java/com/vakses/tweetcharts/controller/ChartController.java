@@ -40,7 +40,7 @@ public class ChartController {
     }
 
     @GetMapping(value = "/counts/{user}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity getLast10UserProfile(@PathVariable @NotNull final String user) {
+    public ResponseEntity<List<UserProfile>> getLast10UserProfile(@PathVariable @NotNull final String user) {
         return ResponseEntity.ok(twitterClient.getUserProfilesByTime(user.toLowerCase()));
     }
 
