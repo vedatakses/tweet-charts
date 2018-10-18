@@ -140,6 +140,7 @@ https://deepai.org/api-docs/#sentiment-analysis
 ## Running Postgre as Docker
 
 > $docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=admin -d postgres \
+> docker exec -it <container_id> bin/bash
 > $psql -h localhost -U postgres \
 > $REATE DATABASE tweetcharts;
 
