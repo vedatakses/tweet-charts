@@ -4,23 +4,68 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ChartsService {
-  private userProfileUrl: string = "http://localhost:8036/charts/profile/";
+  private profileUrl: string = "http://localhost:8036/charts/profile/";
+  private lastProfilesUrl: string = "http://localhost:8036/charts/counts/amazon";
+  private sentimentsUrl: string = "http://localhost:8036/charts/sentiments/amazon";
+  private lastLocationsUrl: string = "http://localhost:8036/charts/locations/amazon";
+  private oembedTweetUrl: string = "http://localhost:8036/charts/oembed/amazon";
 
-  constructor(private http: Http) { }
+  private requestHeader: any;
+  private requestOptions: any;
 
-  getUserProfile(username: any): any {
+  constructor(private http: Http) {
+    this.requestHeader = new Headers().append('Content-Type', 'application/json');
+    this.requestOptions = new RequestOptions({ headers: this.requestHeader });
+  }
+
+  getUserProfile(username: string): any {
     console.log('Retrieving user profile of', username);
-    let requestUrl = this.userProfileUrl + username;
-    let requestHeader = new Headers();
-    requestHeader.append('Content-Type', 'application/json');
+    let requestUrl = this.profileUrl + username;
 
-    let options = new RequestOptions({
-      headers: requestHeader,
-    });
-
-    return this.http.get(requestUrl, options)
+    return this.http.get(requestUrl, this.requestOptions)
       .map(result => {
         return <any[]>result.json();
-      })
+      });
   }
+
+  getLastProfiles(username: string): any {
+    console.log('Retrieving last profiles of', username);
+    let requestUrl = this.lastProfilesUrl + username;
+
+    return this.http.get(requestUrl, this.requestOptions)
+      .map(result => {
+        return <any[]>result.json();
+      });
+  }
+
+  getLastMetionsSentiments(username: string): any {
+    console.log('Retrieving last sentiments of', username);
+    let requestUrl = this.sentimentsUrl + username;
+
+    return this.http.get(requestUrl, this.requestOptions)
+      .map(result => {
+        return <any[]>result.json();
+      });
+  }
+
+  getLastMetionsLocations(username: string): any {
+    console.log('Retrieving mentioners locations of', username);
+    let requestUrl = this.lastLocationsUrl + username;
+
+    return this.http.get(requestUrl, this.requestOptions)
+      .map(result => {
+        return <any[]>result.json();
+      });
+  }
+
+  getLastMentionOEmbedHtml(username: string): any {
+    console.log('Retrieving last mentions oembed link of', username);
+    let requestUrl = this.oembedTweetUrl + username;
+
+    return this.http.get(requestUrl, this.requestOptions)
+      .map(result => {
+        return <any[]>result.json();
+      });
+  }
+
 }
