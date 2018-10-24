@@ -24,3 +24,32 @@
     font-size: 13px;
     height: 30px;
 }
+
+.d-charts {
+    margin: 7.5%;
+}
+
+.p-profile-counts {
+    font-size: 25px;
+    text-align: right;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.main {
+    margin: 7%;
+}
+
+.row-1 {
+    height: 250px;
+}
+
+.row-2 {
+    height: 250px;
+}
+
+.column-1 {
+    width: 350px;
+    height: 270px;
+    float: left;
+    margin: 5px;
+}
