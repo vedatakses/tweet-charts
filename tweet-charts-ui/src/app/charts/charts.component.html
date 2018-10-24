@@ -1,8 +1,39 @@
-<div class="d-charts">
-  <mat-toolbar class="charts-toolbar">
-    <mat-toolbar-row class="charts-toolbar-row">
-      <span class="charts-text">Tweets to Charts</span>
-      <span class="charts-user">@{{username}}</span>
-    </mat-toolbar-row>
-  </mat-toolbar>
+<mat-toolbar class="charts-toolbar">
+  <mat-toolbar-row class="charts-toolbar-row">
+    <span class="charts-text">Tweets to Charts</span>
+    <span class="charts-user">@{{username}}</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="main">
+  <div class="row-1">
+    <div class="column-1" style="background-color:#aaa;">
+      <h2>Column 1</h2>
+      <p>Some text..</p>
+    </div>
+    <div class="column-1" style="background-color:#aaa;">
+      <h2>Column 2</h2>
+      <p>Some text..</p>
+    </div>
+    <div class="column-1" >
+      <output ngModel name="profile">
+        <p class="p-profile-counts">Total Tweets <br> {{ profile?.tweetCount }}<br><br>
+          Total Follower <br> {{ profile?.followerCount }}
+        </p>
+      </output>
+    </div>
+  </div>
+  <div class="row-2">
+    <div class="column-1" style="background-color:#aaa;">
+      <h2>Column 4</h2>
+      <p>Some text..</p>
+    </div>
+    <div class="column-1" style="background-color:#aaa;">
+      <h2>Column 5</h2>
+      <p>Some text..</p>
+    </div>
+    <div class="column-1" style="background-color:#aaa;">
+      <h2>Column 6</h2>
+      <p>Some text..</p>
+    </div>
+  </div>
 </div>

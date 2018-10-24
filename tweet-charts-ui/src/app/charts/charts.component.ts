@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ChartsService } from '../services/charts.service';
+import { UserProfile } from '../model/UserProfile.model';
 
 @Component({
   selector: 'app-charts',
@@ -9,6 +10,7 @@ import { ChartsService } from '../services/charts.service';
 })
 export class ChartsComponent {
   private username: any;
+  public profile: UserProfile;
 
   constructor(private route: ActivatedRoute,
     private router: Router, private chartService: ChartsService) { }
@@ -21,9 +23,10 @@ export class ChartsComponent {
     this.chartService.getUserProfile(this.username)
       .subscribe(result => {
         console.log(result);
+        this.profile = result;
       });
 
-    // for tweet and follower count charts
+/*     // for tweet and follower count charts
     this.chartService.getLastProfiles(this.username)
       .subscribe(result => {
         console.log(result);
@@ -45,6 +48,6 @@ export class ChartsComponent {
     this.chartService.getLastMentionOEmbedHtml(this.username)
       .subscribe(result => {
         console.log(result.html);
-      });
+      }); */
   }
 }
