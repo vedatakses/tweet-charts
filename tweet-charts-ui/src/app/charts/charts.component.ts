@@ -34,12 +34,12 @@ export class ChartsComponent {
         console.log(result);
         
         let followerCount = result.map(element => element.followerCount);
-        let timestamp = result.map(element => element.timestamp);
+        let dateStr = result.map(element => new Date(element.timestamp * 1000).toLocaleString());
 
         this.chart = new Chart('canvas', {
           type: 'line',
           data: {
-            labels: timestamp.reverse(),
+            labels: dateStr.reverse(),
             datasets: [
               { 
                 data: followerCount,
