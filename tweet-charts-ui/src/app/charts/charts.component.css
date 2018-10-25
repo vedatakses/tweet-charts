@@ -48,8 +48,15 @@
 }
 
 .column-1 {
-    width: 350px;
+    width: 32%;
     height: 270px;
     float: left;
     margin: 5px;
+}
+
+.canvas {
+    display: block;
+    width: 458px;
+    height: 229px;
+    margin: 5%;
 }
