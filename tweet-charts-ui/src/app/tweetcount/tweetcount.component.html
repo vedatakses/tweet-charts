@@ -6,10 +6,12 @@
     </mat-toolbar-row>
   </mat-toolbar>
   <div class="row">
-    <p class="label-1">Followers By Time</p>
+    <p class="label-1">Tweets By Time</p>
     <div class="d-canvas">
-      <canvas id="canvas">{{ chartFollowers }}</canvas>
+      <canvas id="canvas">{{ chartTweets }}</canvas>
     </div>
-    <button mat-stroked-button class="next-b" type="submit" (click)='generateTweetsChart()'>></button>
+    <button mat-stroked-button class="next-b" type="submit" (click)='generateFollowersChart()'><</button> 
+    <button mat-stroked-button class="next-b">>
+    </button>
   </div>
 </div>
