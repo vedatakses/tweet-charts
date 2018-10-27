@@ -66,8 +66,8 @@ export class TweetcountComponent implements OnInit {
       });
   }
 
-  generateFollowersChart() {
-    this.router.navigate(['charts', this.username]);
+  generateMentionsChart() {
+    this.router.navigate(['charts', this.username, 'mentions-chart']);
   }
 
 }

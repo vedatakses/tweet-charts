@@ -18,6 +18,8 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by veraxmedax on 07/10/2018.
@@ -58,7 +60,7 @@ public class TwitterClient {
         return twitter.searchOperations().search(searchParameters).getTweets();
     }
 
-    public List<String> getLastLocationsOfMentions(final String user) {
+    public Map<String, Long> getLastLocationsOfMentions(final String user) {
         log.info("Retrieving locations of {} mentions", user);
         final List<String> locations = new ArrayList<>();
         final List<Tweet> tweets = getLastMentionedTweets(user);
@@ -74,7 +76,7 @@ public class TwitterClient {
             }
         }
         log.info("Total of {} locations detected", locations.size());
-        return locations;
+        return locations.stream().collect(Collectors.groupingBy(e -> e.toString(), Collectors.counting()));
     }
 
     public OEmbedTweet getLastMentionAsEmbeddedTweet(final String user) {

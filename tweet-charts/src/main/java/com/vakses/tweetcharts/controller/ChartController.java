@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by veraxmedax on 03/10/2018.
@@ -50,7 +51,7 @@ public class ChartController {
     }
 
     @GetMapping(value = "/locations/{user}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<List<String>> getMentionsLocations(@PathVariable @NotNull final String user) {
+    public ResponseEntity<Map<String, Long>> getMentionsLocations(@PathVariable @NotNull final String user) {
         return ResponseEntity.ok(twitterClient.getLastLocationsOfMentions(user.toLowerCase()));
     }
 
