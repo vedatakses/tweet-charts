@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ChartsService } from '../services/charts.service';
 import { UserProfile } from '../model/UserProfile.model';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-charts',
@@ -9,8 +10,9 @@ import { UserProfile } from '../model/UserProfile.model';
   styleUrls: ['./charts.component.css']
 })
 export class ChartsComponent {
-  private username: any;
-  public profile: UserProfile;
+  username: any;
+  profile: UserProfile;
+  chartFollowers = [];
 
   constructor(private route: ActivatedRoute,
     private router: Router, private chartService: ChartsService) { }
@@ -26,28 +28,67 @@ export class ChartsComponent {
         this.profile = result;
       });
 
-/*     // for tweet and follower count charts
+    // for follower count charts
     this.chartService.getLastProfiles(this.username)
       .subscribe(result => {
         console.log(result);
-      });
 
-    // for last mentioners sentiments
-    this.chartService.getLastMetionsSentiments(this.username)
-      .subscribe(result => {
-        console.log(result);
-      });
+        let countFollower = result.map(element => element.followerCount);
+        let countTweet = result.map(element => element.tweetCount);
+        let dateStr = result.map(element => new Date(element.timestamp * 1000).toLocaleString());
 
-    // for last mentioners locations
-    this.chartService.getLastMetionsLocations(this.username)
-      .subscribe(result => {
-        console.log(result);
-      });
+        this.chartFollowers = new Chart('canvas', {
+          type: 'line',
+          data: {
+            labels: dateStr.reverse(),
+            datasets: [
+              {
+                data: countFollower.reverse(),
+                borderColor: "#3cba9f",
+                fill: false
+              },
 
-    // for last mention oembed link
-    this.chartService.getLastMentionOEmbedHtml(this.username)
-      .subscribe(result => {
-        console.log(result.html);
-      }); */
+            ]
+          },
+          options: {
+            legend: {
+              display: false
+            },
+            scales: {
+              xAxes: [{
+                display: true
+              }],
+              yAxes: [{
+                display: true
+              }],
+            }
+          }
+        });
+      });
   }
+
+  generateTweetsChart() {
+    this.router.navigate(['charts', this.username, 'followers-chart']);
+  }
+
+  /*    // for last mentioners sentiments
+      this.chartService.getLastMetionsSentiments(this.username)
+        .subscribe(result => {
+          console.log(result);
+        });
+  
+      // for last mentioners locations
+      this.chartService.getLastMetionsLocations(this.username)
+        .subscribe(result => {
+          console.log(result);
+        });
+  
+      // for last mention oembed link
+      this.chartService.getLastMentionOEmbedHtml(this.username)
+        .subscribe(result => {
+          console.log(result.html);
+        }); * /
+    }
+  }
+  */
 }

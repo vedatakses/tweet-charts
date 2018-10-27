@@ -17,12 +17,16 @@ import {
   MatIconModule,
   MatButtonModule,
 } from '@angular/material';
+import { TweetcountComponent } from './tweetcount/tweetcount.component';
+import { MentionsComponent } from './mentions/mentions.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
-    ChartsComponent
+    ChartsComponent,
+    TweetcountComponent,
+    MentionsComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,9 @@ import {
     MatButtonModule,
     RouterModule.forRoot([
       { path: '', component: WelcomeComponent },
-      { path: 'charts/:username', component: ChartsComponent }
+      { path: 'charts/:username', component: ChartsComponent },
+      { path: 'charts/:username/followers-chart', component: TweetcountComponent},
+      { path: 'charts/:username/mentions-chart', component: MentionsComponent}
     ])
   ],
   providers: [ChartsService],
