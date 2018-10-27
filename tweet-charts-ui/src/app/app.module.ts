@@ -40,7 +40,7 @@ import { MentionsComponent } from './mentions/mentions.component';
     RouterModule.forRoot([
       { path: '', component: WelcomeComponent },
       { path: 'charts/:username', component: ChartsComponent },
-      { path: 'charts/:username/followers-chart', component: TweetcountComponent},
+      { path: 'charts/:username/tweets-chart', component: TweetcountComponent},
       { path: 'charts/:username/mentions-chart', component: MentionsComponent}
     ])
   ],

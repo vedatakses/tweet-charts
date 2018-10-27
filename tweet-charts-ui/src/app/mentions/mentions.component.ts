@@ -26,8 +26,6 @@ export class MentionsComponent implements OnInit {
       .subscribe(result => {
         console.log(result);
         Object.keys(result).forEach(key => {
-          console.log("key: " + key);
-          console.log("value: " + result[key]);
           userLocations.push(key);
           counts.push(result[key]);
           backgroundColors.push(this.generateBackgroundColor());
@@ -50,6 +48,10 @@ export class MentionsComponent implements OnInit {
           }
         });
       });
+  }
+
+  generateTweetsChart() {
+    this.router.navigate(['charts', this.username, 'tweets-chart']);
   }
 
   generateBackgroundColor() {

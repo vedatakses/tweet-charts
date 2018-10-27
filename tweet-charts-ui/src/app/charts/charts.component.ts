@@ -51,6 +51,10 @@ export class ChartsComponent {
             ]
           },
           options: {
+            title: {
+              display: true,
+              text: 'Followers by Time'
+            },
             legend: {
               display: false
             },
@@ -68,7 +72,7 @@ export class ChartsComponent {
   }
 
   generateTweetsChart() {
-    this.router.navigate(['charts', this.username, 'followers-chart']);
+    this.router.navigate(['charts', this.username, 'tweets-chart']);
   }
 
   /*    // for last mentioners sentiments

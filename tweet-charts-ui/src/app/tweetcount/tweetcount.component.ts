@@ -50,6 +50,10 @@ export class TweetcountComponent implements OnInit {
             ]
           },
           options: {
+            title: {
+              display: true,
+              text: 'Tweets By Time'
+            }, 
             legend: {
               display: false
             },
@@ -64,6 +68,10 @@ export class TweetcountComponent implements OnInit {
           }
         });
       });
+  }
+
+  generateFollowersChart() {
+    this.router.navigate(['charts', this.username]);
   }
 
   generateMentionsChart() {
