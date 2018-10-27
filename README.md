@@ -66,26 +66,14 @@ Following response generates the followers and tweets charts in dashboard.
 **GET last 50 (max) locations of user mentions:**\
 (not filtering unreal ones)
 ```json
-[
-    "Wisconsin",
-    "Rome",
-    "Paradise",
-    "Wisconsin",
-    "United States",
-    "San Francisco",
-    "Wisconsin",
-    "Newcastle upon tyne",
-    "San Francisco",
-    "Malaga",
-    "Slovenia",
-    "Los Angeles",
-    "Walterboro",
-    "Wisconsin",
-    "Windy City",
-    "Moscow",
-    "Leesburg",
-    "Baltimore"
-]
+{
+	"Milwaukee": 1,
+	"Los Angeles": 1,
+	"CA": 1,
+	"New Delhi": 2,
+	"USA": 1,
+	"New York": 4
+}
 ```
 
 **GET oembed link of last mention:**\
