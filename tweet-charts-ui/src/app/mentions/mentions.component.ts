@@ -32,7 +32,7 @@ export class MentionsComponent implements OnInit {
         })
 
         this.locationsChart = new Chart('canvas', {
-          type: 'pie',
+          type: 'doughnut',
           data: {
             labels: userLocations,
             datasets: [{
