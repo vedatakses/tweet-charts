@@ -16,5 +16,4 @@ export class WelcomeComponent implements OnInit {
   createCharts(username: string) {
     this.router.navigate(['charts', username]);
   }
-
 }

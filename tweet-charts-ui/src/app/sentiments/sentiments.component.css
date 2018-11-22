@@ -1,0 +1,55 @@
+.charts-toolbar {
+    background-color: #221F1F;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    min-height: 30px;
+}
+
+.charts-toolbar-row {
+    color: whitesmoke;
+    position: fixed;
+    align-self: center;
+    font-family: inherit;
+    font-size: 13px;
+    height: 30px;
+}
+
+.charts-user {
+    color: whitesmoke;
+    position: fixed;
+    right: 1%;
+    font-family: inherit;
+    font-size: 13px;
+    height: 30px;
+}
+
+.row {
+    margin: 7.5%;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 48px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }

@@ -1,0 +1,16 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<div class="main">
+  <mat-toolbar class="charts-toolbar">
+    <mat-toolbar-row class="charts-toolbar-row">
+      <span class="charts-text">Tweets to Charts</span>
+      <span class="charts-user">@{{username}}</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="row">
+    <i class="material-icons">sentiment_very_satisfied</i><br>
+    <i class="material-icons">sentiment_satisfied</i><br>
+    <i class="material-icons">sentiment_very_dissatisfied</i><br>
+    <button mat-stroked-button class="next-b" type="submit" (click)='generateMentionsChart()'><</button> 
+  </div>
+</div>
