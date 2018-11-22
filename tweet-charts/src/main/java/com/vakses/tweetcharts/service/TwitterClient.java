@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.social.twitter.api.OEmbedOptions;
 import org.springframework.social.twitter.api.OEmbedTweet;
 import org.springframework.social.twitter.api.SearchParameters;
@@ -15,10 +16,13 @@ import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -28,6 +32,8 @@ import java.util.stream.Collectors;
 @Service
 public class TwitterClient {
 
+    private static final String POPULAR_ACCOUNTS_FILE = "popular-accounts.txt";
+
     private Twitter twitter;
     private UserProfileRepository userProfileRepository;
 
@@ -35,6 +41,21 @@ public class TwitterClient {
     public TwitterClient(final Twitter twitter, final UserProfileRepository userProfileRepository) {
         this.twitter = twitter;
         this.userProfileRepository = userProfileRepository;
+    }
+
+    @Scheduled(fixedDelayString = "86400000")
+    public void searchPopularUserProfiles() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(POPULAR_ACCOUNTS_FILE).getFile());
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String account = scanner.nextLine();
+                getUserProfile(account);
+                TimeUnit.MILLISECONDS.sleep(50L);
+            }
+        } catch (Exception e) {
+            log.warn("Error when reading file: {}", POPULAR_ACCOUNTS_FILE);
+        }
     }
 
     public UserProfile getUserProfile(final String username) {

@@ -34,7 +34,6 @@ export class ChartsComponent {
         console.log(result);
 
         let countFollower = result.map(element => element.followerCount);
-        let countTweet = result.map(element => element.tweetCount);
         let dateStr = result.map(element => new Date(element.timestamp * 1000).toLocaleString());
 
         this.chartFollowers = new Chart('canvas', {
