@@ -43,20 +43,20 @@ public class TwitterClient {
         this.userProfileRepository = userProfileRepository;
     }
 
-    @Scheduled(fixedDelayString = "86400000")
-    public void searchPopularUserProfiles() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource(POPULAR_ACCOUNTS_FILE).getFile());
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNextLine()) {
-                String account = scanner.nextLine();
-                getUserProfile(account);
-                TimeUnit.MILLISECONDS.sleep(100L);
-            }
-        } catch (Exception e) {
-            log.warn("Error when reading file: {}", POPULAR_ACCOUNTS_FILE);
-        }
-    }
+//    @Scheduled(fixedDelayString = "86400000")
+//    public void searchPopularUserProfiles() {
+//        ClassLoader classLoader = getClass().getClassLoader();
+//        File file = new File(classLoader.getResource(POPULAR_ACCOUNTS_FILE).getFile());
+//        try (Scanner scanner = new Scanner(file)) {
+//            while (scanner.hasNextLine()) {
+//                String account = scanner.nextLine();
+//                getUserProfile(account);
+//                TimeUnit.MILLISECONDS.sleep(100L);
+//            }
+//        } catch (Exception e) {
+//            log.warn("Error when reading file: {}", POPULAR_ACCOUNTS_FILE);
+//        }
+//    }
 
     public UserProfile getUserProfile(final String username) {
         TwitterProfile twitterProfile = twitter.userOperations().getUserProfile(username);
