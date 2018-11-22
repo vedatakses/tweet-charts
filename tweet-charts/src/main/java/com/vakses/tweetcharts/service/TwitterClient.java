@@ -51,7 +51,7 @@ public class TwitterClient {
             while (scanner.hasNextLine()) {
                 String account = scanner.nextLine();
                 getUserProfile(account);
-                TimeUnit.MILLISECONDS.sleep(50L);
+                TimeUnit.MILLISECONDS.sleep(100L);
             }
         } catch (Exception e) {
             log.warn("Error when reading file: {}", POPULAR_ACCOUNTS_FILE);
