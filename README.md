@@ -132,3 +132,10 @@ https://deepai.org/api-docs/#sentiment-analysis
 > $psql -h localhost -U postgres \
 > $CREATE DATABASE tweetcharts;
 
+**Some Postgre Commands:**
+```
+\l            : show databases
+\c tweetcharts: connect to tweetcharts db
+\dt	      : show tables
+```
+
