@@ -139,3 +139,10 @@ https://deepai.org/api-docs/#sentiment-analysis
 \dt	      : show tables
 ```
 
+**Getting Postgre Table Dump:**
+```
+connect to tweetcharts db
+\copy user_profile to 'user_profiles' csv;
+then copy file from docker to host:
+docker cp <containerId>:/file/path/within/container /host/path/target
+```
