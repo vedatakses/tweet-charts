@@ -15,6 +15,15 @@ export class SentimentsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => this.username = params['username']);
+
+    // for last mentioners locations
+    this.chartService.getLastMetionsSentiments(this.username)
+      .subscribe(result => {
+        console.log(result);
+        Object.keys(result).forEach(key => {
+          // TODO : implementation required
+        })
+      });
   }
 
   generateMentionsChart() {

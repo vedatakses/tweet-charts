@@ -17,8 +17,13 @@ import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -33,6 +38,7 @@ import java.util.stream.Collectors;
 public class TwitterClient {
 
     private static final String POPULAR_ACCOUNTS_FILE = "popular-accounts.txt";
+    private static final String LAST_SEARCH_DATE_FILE = "last_search_date.txt";
 
     private Twitter twitter;
     private UserProfileRepository userProfileRepository;
@@ -43,21 +49,56 @@ public class TwitterClient {
         this.userProfileRepository = userProfileRepository;
     }
 
-//    @Scheduled(fixedDelayString = "86400000")
-//    public void searchPopularUserProfiles() {
-//        ClassLoader classLoader = getClass().getClassLoader();
-//        File file = new File(classLoader.getResource(POPULAR_ACCOUNTS_FILE).getFile());
-//        try (Scanner scanner = new Scanner(file)) {
-//            while (scanner.hasNextLine()) {
-//                String account = scanner.nextLine();
-//                getUserProfile(account);
-//                TimeUnit.MILLISECONDS.sleep(100L);
-//            }
-//        } catch (Exception e) {
-//            log.warn("Error when reading file: {}", POPULAR_ACCOUNTS_FILE);
-//        }
-//    }
+    @Scheduled(fixedDelayString = "86400000")
+    public void searchPopularUserProfiles() {
+        if (isDailyJobAlreadyProcessed()) {
+            return;
+        }
+        final ClassLoader classLoader = getClass().getClassLoader();
+        final File file = new File(classLoader.getResource(POPULAR_ACCOUNTS_FILE).getFile());
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String account = scanner.nextLine();
+                getUserProfile(account);
+                TimeUnit.MILLISECONDS.sleep(100L);
+            }
+        } catch (Exception e) {
+            log.warn("Error when reading file: {}", POPULAR_ACCOUNTS_FILE);
+        }
+    }
 
+    private boolean isDailyJobAlreadyProcessed() {
+        final ClassLoader classLoader = getClass().getClassLoader();
+        final File file = new File(classLoader.getResource(LAST_SEARCH_DATE_FILE).getFile());
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                final String lastDailyJobDate = scanner.nextLine();
+                final String dateToday = todayDateFormat();
+                if (lastDailyJobDate.equals(dateToday)) {
+                    log.info("Today's job has already processed, skipping processing again..");
+                    return true;
+                }
+                updateLastSearchDate(file, dateToday);
+            }
+        } catch (Exception e) {
+            log.warn("Error when reading file: {}", POPULAR_ACCOUNTS_FILE);
+        }
+        return false;
+    }
+
+    private void updateLastSearchDate(final File file, final String updatingDate) throws IOException {
+        final FileWriter fileWriter = new FileWriter(file, false);
+        fileWriter.write(updatingDate);
+        fileWriter.close();
+    }
+
+    private String todayDateFormat() {
+        final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        final Date date = new Date();
+        return dateFormat.format(date);
+    }
+
+    // TODO : write stored profiles to the file (user_profile.csv)
     public UserProfile getUserProfile(final String username) {
         TwitterProfile twitterProfile = twitter.userOperations().getUserProfile(username);
         int tweetCount = twitterProfile.getStatusesCount();
