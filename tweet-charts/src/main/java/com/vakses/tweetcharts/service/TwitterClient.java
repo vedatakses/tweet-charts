@@ -8,8 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.social.twitter.api.OEmbedOptions;
-import org.springframework.social.twitter.api.OEmbedTweet;
 import org.springframework.social.twitter.api.SearchParameters;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
@@ -54,6 +52,7 @@ public class TwitterClient {
         if (isDailyJobAlreadyProcessed()) {
             return;
         }
+        log.info("Retrieving popular user profiles");
         final ClassLoader classLoader = getClass().getClassLoader();
         final File file = new File(classLoader.getResource(POPULAR_ACCOUNTS_FILE).getFile());
         try (Scanner scanner = new Scanner(file)) {
@@ -141,22 +140,18 @@ public class TwitterClient {
         return locations.stream().collect(Collectors.groupingBy(e -> e.toString(), Collectors.counting()));
     }
 
-    public OEmbedTweet getLastMentionAsEmbeddedTweet(final String user) {
+    public String getLastMentionTweetId(final String user) {
         log.info("Retrieving last '@{}' mention as embedded tweet", user);
-        long tweetId = 0L;
+        String tweetId = "0";
         final List<Tweet> tweets = getLastMentionedTweets(user);
         for (Tweet tweet : tweets) {
             if (!tweet.isRetweet() && !tweet.getText().contains("RT")) {
-                tweetId = tweet.getId();
+                tweetId = tweet.getIdStr();
                 break;
             }
         }
-        if (tweetId > 0) {
-            final OEmbedOptions options = new OEmbedOptions();
-            options.maxWidth(400);
-            return twitter.timelineOperations().getStatusOEmbed(String.valueOf(tweetId), options);
-        }
-        return null;
+        log.info("Responding with last tweetId: {}", tweetId);
+        return tweetId;
     }
 
     private String getFilteredLocation(String location) {

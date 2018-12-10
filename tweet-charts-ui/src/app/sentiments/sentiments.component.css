@@ -25,15 +25,46 @@
     height: 30px;
 }
 
+.main {
+    margin: 10%;
+}
+
 .row {
     margin: 7.5%;
 }
 
+.column {
+    float: left;
+    width: 50%;
+}
+
+.column-1 {
+    float: left;
+    width: 100%;
+    height: 33%;
+}
+
+.column-2 {
+    float: left;
+    width: 30%;
+}
+
+.h1-p {
+    margin-top: 10px;
+}
+
+.sentiment-text {
+    color: darkslategrey;
+    font-family: sans-serif;
+}
+
 .material-icons {
+    margin-bottom: 25px;
+    margin-right: 25px;
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
-    font-size: 48px;  /* Preferred icon size */
+    font-size: 60px;  /* Preferred icon size */
     display: inline-block;
     line-height: 1;
     text-transform: none;
@@ -52,4 +83,8 @@
   
     /* Support for IE. */
     font-feature-settings: 'liga';
+  }
+
+  .twitter-tweet {
+    margin: auto;
   }

@@ -8,9 +8,39 @@
     </mat-toolbar-row>
   </mat-toolbar>
   <div class="row">
-    <i class="material-icons">sentiment_very_satisfied</i><br>
-    <i class="material-icons">sentiment_satisfied</i><br>
-    <i class="material-icons">sentiment_very_dissatisfied</i><br>
-    <button mat-stroked-button class="next-b" type="submit" (click)='generateMentionsChart()'><</button> 
+    <div class="column">
+        <h2 class="sentiment-text">Last Sentiments of Mentions</h2><br><br>
+        <div class="column-1">
+          <div class="column-2">
+              <i class="material-icons">sentiment_very_satisfied</i>
+          </div>
+          <div class="column">
+            <h1 class="h1-p">%{{percentagePositive}}</h1>
+          </div>
+          <br>
+        </div>
+        <div class="column-1">
+          <div class="column-2">
+              <i class="material-icons">sentiment_satisfied</i>
+          </div>
+          <div class="column">
+              <h1 class="h1-p">%{{percentageNeutral}}</h1>
+          </div>
+          <br>
+        </div>
+        <div class="column-1">
+          <div class="column-2">
+              <i class="material-icons">sentiment_very_dissatisfied</i>
+          </div>
+          <div class="column">
+              <h1 class="h1-p">%{{percentageNegative}}</h1>
+          </div>
+          <br>
+        </div>
+    </div>
+    <div class="column">
+        <h2 class="sentiment-text">Last Mention of @{{username}}</h2><br><br>
+        <div id="oembed-tweet"></div>
+    </div>
   </div>
 </div>

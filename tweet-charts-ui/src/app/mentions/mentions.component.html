@@ -1,15 +1,15 @@
 <div class="main">
-    <mat-toolbar class="charts-toolbar">
-      <mat-toolbar-row class="charts-toolbar-row">
-        <span class="charts-text">Tweets to Charts</span>
-        <span class="charts-user">@{{username}}</span>
-      </mat-toolbar-row>
-    </mat-toolbar>
-    <div class="row">
-      <div class="d-canvas">
-        <canvas id="canvas">{{ locationsChart }}</canvas>
-      </div>
+  <mat-toolbar class="charts-toolbar">
+    <mat-toolbar-row class="charts-toolbar-row">
+      <span class="charts-text">Tweets to Charts</span>
+      <span class="charts-user">@{{username}}</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="row">
+    <div class="d-canvas">
+      <canvas id="canvas">{{ locationsChart }}</canvas>
     </div>
-    <button mat-stroked-button class="next-b" type="submit" (click)='generateTweetsChart()'><</button> 
-    <button mat-stroked-button class="next-b" type="submit" (click)='generateSentimentsChart()'>></button>
   </div>
+  <button mat-stroked-button class="next-b" type="submit" (click)='generateTweetsChart()'><</button> 
+  <button mat-stroked-button class="next-b" type="submit" (click)='generateSentimentsChart()'>></button>
+</div>
