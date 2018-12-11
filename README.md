@@ -77,6 +77,7 @@ Following response generates the followers and tweets charts in dashboard.
 ```
 
 **GET oembed link of last mention:**\
+**First Design:**
 (the html in response should be used to embed the tweet to web site)
 
 ```json
@@ -96,6 +97,13 @@ Following response generates the followers and tweets charts in dashboard.
     "url": "https://twitter.com/Jassimalkanani/status/1050783998560088066"
 }
 ```
+**Second Design**:
+It was thought to return only the tweetId as a string in second design which can then be used in twttr.widgets.createTweet(..)
+
+```
+123145648798
+```
+
 **For more information:**\
 https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-oembed
 
