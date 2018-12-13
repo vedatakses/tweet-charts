@@ -77,6 +77,7 @@ Following response generates the followers and tweets charts in dashboard.
 ```
 
 **GET oembed link of last mention:**\
+**First Design:**
 (the html in response should be used to embed the tweet to web site)
 
 ```json
@@ -96,6 +97,13 @@ Following response generates the followers and tweets charts in dashboard.
     "url": "https://twitter.com/Jassimalkanani/status/1050783998560088066"
 }
 ```
+**Second Design**:
+It was thought to return only the tweetId as a string in second design which can then be used in twttr.widgets.createTweet(..)
+
+```
+123145648798
+```
+
 **For more information:**\
 https://developer.twitter.com/en/docs/tweets/post-and-engage/api-reference/get-statuses-oembed
 
@@ -132,3 +140,17 @@ https://deepai.org/api-docs/#sentiment-analysis
 > $psql -h localhost -U postgres \
 > $CREATE DATABASE tweetcharts;
 
+**Some Postgre Commands:**
+```
+\l            : show databases
+\c tweetcharts: connect to tweetcharts db
+\dt	      : show tables
+```
+
+**Getting Postgre Table Dump:**
+```
+connect to tweetcharts db
+\copy user_profile to 'user_profiles' csv;
+then copy file from docker to host:
+docker cp <containerId>:/file/path/within/container /host/path/target
+```
