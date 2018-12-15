@@ -1,5 +1,6 @@
 amazon
 siemens
+ikea_presse
 yahoo
 google
 searchmetrics

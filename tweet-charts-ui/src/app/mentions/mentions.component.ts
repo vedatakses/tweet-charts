@@ -54,6 +54,10 @@ export class MentionsComponent implements OnInit {
     this.router.navigate(['charts', this.username, 'tweets-chart']);
   }
 
+  generateSentimentsChart() {
+    this.router.navigate(['charts', this.username, 'sentiments-chart']);
+  }
+
   generateBackgroundColor() {
     var r = Math.floor(Math.random() * 255);
     var g = Math.floor(Math.random() * 255);

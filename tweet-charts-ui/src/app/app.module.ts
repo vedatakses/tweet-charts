@@ -19,6 +19,7 @@ import {
 } from '@angular/material';
 import { TweetcountComponent } from './tweetcount/tweetcount.component';
 import { MentionsComponent } from './mentions/mentions.component';
+import { SentimentsComponent } from './sentiments/sentiments.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MentionsComponent } from './mentions/mentions.component';
     WelcomeComponent,
     ChartsComponent,
     TweetcountComponent,
-    MentionsComponent
+    MentionsComponent,
+    SentimentsComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import { MentionsComponent } from './mentions/mentions.component';
       { path: '', component: WelcomeComponent },
       { path: 'charts/:username', component: ChartsComponent },
       { path: 'charts/:username/tweets-chart', component: TweetcountComponent},
-      { path: 'charts/:username/mentions-chart', component: MentionsComponent}
+      { path: 'charts/:username/mentions-chart', component: MentionsComponent},
+      { path: 'charts/:username/sentiments-chart', component: SentimentsComponent}
     ])
   ],
   providers: [ChartsService],
