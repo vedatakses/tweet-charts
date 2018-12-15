@@ -1,14 +1,17 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, SecurityContext } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ChartsService } from '../services/charts.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sentiments',
   templateUrl: './sentiments.component.html',
-  styleUrls: ['./sentiments.component.css']
+  styleUrls: ['./sentiments.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class SentimentsComponent implements OnInit, AfterViewInit {
+export class SentimentsComponent implements OnInit {
 
+  isDataAvailable: boolean = false;
   username: any;
   sentiments = []
   percentageNegative;
@@ -16,13 +19,10 @@ export class SentimentsComponent implements OnInit, AfterViewInit {
   percentagePositive;
   profileLink: string;
   tweetId;
+  oembedHtml;
 
   constructor(private route: ActivatedRoute,
-    private router: Router, private chartService: ChartsService) { }
-
-  ngAfterViewInit() {
-    // @ts-ignore
-    twttr.widgets.load();
+    private router: Router, private chartService: ChartsService, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -55,29 +55,15 @@ export class SentimentsComponent implements OnInit, AfterViewInit {
         this.percentagePositive = ((100 * sentimentsPositive) / total).toFixed(2);
       });
 
+          // Get oembed tweet
     this.chartService.getLastMentionOEmbedHtml(this.username)
-      .subscribe(
-        result => this.tweetId = result,
-        error => console.log("Error: ", error),
-        () => this.oembedTweet()
-      );
-  }
-
-  oembedTweet() {
-    let id = '' + 1071884444968079360;
-    console.log(id);
-    console.log(1071884444968079360);
-    // @ts-ignore
-    twttr.widgets.createTweet(
-      id,
-      document.getElementById('oembed-tweet'),
-      {
-        align: 'left',
-        width: 400
-      })
-      .then(function (el) {
-        console.log("Tweet displayed.")
-      });
+    .subscribe(
+      result => {
+        console.log("result: " + result['html']);
+        let index = result['html'].lastIndexOf("blockquote"); 
+        this.oembedHtml = result['html'].substring(0, index + 11);
+      }
+    );
   }
 
   generateMentionsChart() {

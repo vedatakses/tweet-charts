@@ -1,5 +1,4 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <div class="main">
   <mat-toolbar class="charts-toolbar">
     <mat-toolbar-row class="charts-toolbar-row">
@@ -9,38 +8,42 @@
   </mat-toolbar>
   <div class="row">
     <div class="column">
-        <h2 class="sentiment-text">Last Sentiments of Mentions</h2><br><br>
-        <div class="column-1">
-          <div class="column-2">
-              <i class="material-icons">sentiment_very_satisfied</i>
-          </div>
-          <div class="column">
-            <h1 class="h1-p">%{{percentagePositive}}</h1>
-          </div>
-          <br>
+      <h2 class="sentiment-text">Last Sentiments of Mentions</h2><br><br>
+      <div class="column-1">
+        <div class="column-2">
+          <i class="material-icons">sentiment_very_satisfied</i>
         </div>
-        <div class="column-1">
-          <div class="column-2">
-              <i class="material-icons">sentiment_satisfied</i>
-          </div>
-          <div class="column">
-              <h1 class="h1-p">%{{percentageNeutral}}</h1>
-          </div>
-          <br>
+        <div class="column">
+          <h1 class="h1-p">%{{percentagePositive}}</h1>
         </div>
-        <div class="column-1">
-          <div class="column-2">
-              <i class="material-icons">sentiment_very_dissatisfied</i>
-          </div>
-          <div class="column">
-              <h1 class="h1-p">%{{percentageNegative}}</h1>
-          </div>
-          <br>
+        <br>
+      </div>
+      <div class="column-1">
+        <div class="column-2">
+          <i class="material-icons">sentiment_satisfied</i>
         </div>
+        <div class="column">
+          <h1 class="h1-p">%{{percentageNeutral}}</h1>
+        </div>
+        <br>
+      </div>
+      <div class="column-1">
+        <div class="column-2">
+          <i class="material-icons">sentiment_very_dissatisfied</i>
+        </div>
+        <div class="column">
+          <h1 class="h1-p">%{{percentageNegative}}</h1>
+        </div>
+        <br>
+      </div>
     </div>
     <div class="column">
-        <h2 class="sentiment-text">Last Mention of @{{username}}</h2><br><br>
-        <div id="oembed-tweet"></div>
+      <h2 class="sentiment-text">Last Mention of @{{username}}</h2><br><br>
+      <div class="oembed-tweet" [innerHTML]="oembedHtml"></div>
+      <!-- <div id="container"></div> -->
     </div>
   </div>
+  <!-- <div class="row">
+      <button mat-stroked-button class="next-b" type="submit" (click)='generateMentionsChart()'><</button> 
+  </div> -->
 </div>

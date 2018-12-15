@@ -52,7 +52,7 @@ public class ChartController {
     }
 
     @GetMapping(value = "/oembed/{user}")
-    public String getLastMentionAsEmbeddedTweet(@PathVariable String user) {
-        return twitterClient.getLastMentionTweetId(user.toLowerCase());
+    public OEmbedTweet getLastMentionAsEmbeddedTweet(@PathVariable String user) {
+        return twitterClient.getLastMentionAsEmbeddedTweet(user.toLowerCase());
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.social.twitter.api.OEmbedOptions;
+import org.springframework.social.twitter.api.OEmbedTweet;
 import org.springframework.social.twitter.api.SearchParameters;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.Twitter;
@@ -140,18 +142,23 @@ public class TwitterClient {
         return locations.stream().collect(Collectors.groupingBy(e -> e.toString(), Collectors.counting()));
     }
 
-    public String getLastMentionTweetId(final String user) {
+    public OEmbedTweet getLastMentionAsEmbeddedTweet(final String user) {
         log.info("Retrieving last '@{}' mention as embedded tweet", user);
-        String tweetId = "0";
+        long tweetId = 0L;
         final List<Tweet> tweets = getLastMentionedTweets(user);
         for (Tweet tweet : tweets) {
             if (!tweet.isRetweet() && !tweet.getText().contains("RT")) {
-                tweetId = tweet.getIdStr();
+                tweetId = tweet.getId();
                 break;
             }
         }
-        log.info("Responding with last tweetId: {}", tweetId);
-        return tweetId;
+        if (tweetId > 0) {
+            final OEmbedOptions options = new OEmbedOptions();
+            options.maxWidth(400);
+            options.omitScript();
+            return twitter.timelineOperations().getStatusOEmbed(String.valueOf(tweetId), options);
+        }
+        return null;
     }
 
     private String getFilteredLocation(String location) {
