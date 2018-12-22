@@ -39,6 +39,7 @@ public class DeepAIClient {
 
     public SentimentResponse getSentiments(final String user) {
         List<String> tweets = findLastTweets(user);
+        tweets.forEach(tweet -> log.info("tweet: {}", tweet));
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<MultiValueMap<String, String>> request = preparePostRequest(tweets);
         log.info("requesting sentiments for {} tweets", tweets.size());

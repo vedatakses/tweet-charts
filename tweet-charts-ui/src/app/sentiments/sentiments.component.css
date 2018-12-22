@@ -36,6 +36,12 @@
 .column {
     float: left;
     width: 50%;
+    margin-right: 10%;
+}
+
+.column-sentiments {
+    float: left;
+    width: 40%;
 }
 
 .column-1 {
@@ -58,13 +64,13 @@
     font-family: sans-serif;
 }
 
-.material-icons {
+.mat-icons {
     margin-bottom: 25px;
     margin-right: 25px;
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
-    font-size: 48px;  /* Preferred icon size */
+    font-size: 55px;  /* Preferred icon size */
     display: inline-block;
     line-height: 1;
     text-transform: none;
@@ -122,3 +128,16 @@ blockquote.twitter-tweet a:hover,
 blockquote.twitter-tweet a:focus {
   text-decoration: underline;
 }
+
+.loading-indicator {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
