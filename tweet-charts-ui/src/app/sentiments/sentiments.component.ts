@@ -60,8 +60,9 @@ export class SentimentsComponent implements OnInit {
     .subscribe(
       result => {
         console.log("result: " + result['html']);
-        let index = result['html'].lastIndexOf("blockquote"); 
+        let index = result['html'].lastIndexOf("blockquote");
         this.oembedHtml = result['html'].substring(0, index + 11);
+        this.isDataAvailable = true;
       }
     );
   }

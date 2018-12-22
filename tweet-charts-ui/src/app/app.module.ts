@@ -16,6 +16,7 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatButtonModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { TweetcountComponent } from './tweetcount/tweetcount.component';
 import { MentionsComponent } from './mentions/mentions.component';
@@ -39,6 +40,7 @@ import { SentimentsComponent } from './sentiments/sentiments.component';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     RouterModule.forRoot([
       { path: '', component: WelcomeComponent },
       { path: 'charts/:username', component: ChartsComponent },
