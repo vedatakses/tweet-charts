@@ -32,7 +32,6 @@ export class ChartsComponent {
     this.chartService.getLastProfiles(this.username)
       .subscribe(result => {
         console.log(result);
-
         let countFollower = result.map(element => element.followerCount);
         let dateStr = result.map(element => new Date(element.timestamp * 1000).toLocaleString());
 

@@ -49,7 +49,7 @@ public class TwitterClient {
         this.userProfileRepository = userProfileRepository;
     }
 
-    @Scheduled(fixedDelayString = "86400000")
+    //@Scheduled(fixedDelayString = "86400000")
     public void searchPopularUserProfiles() {
         if (isDailyJobAlreadyProcessed()) {
             return;

@@ -42,3 +42,9 @@
     font-size: 120%;
     font-style: unset;
   }
+
+  .home-link {
+    margin-left: 40%;
+    text-decoration: none;
+    color: aliceblue;
+  }

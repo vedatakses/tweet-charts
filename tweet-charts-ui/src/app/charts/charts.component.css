@@ -54,3 +54,9 @@
 .next-b {
     margin-top: 20px;
 }
+
+.home-link {
+    margin-left: 40%;
+    text-decoration: none;
+    color: aliceblue;
+  }
