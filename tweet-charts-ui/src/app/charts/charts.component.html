@@ -1,7 +1,8 @@
-<div class="main">
+<div *ngIf="chartFollowers!=[]" class="main">
   <mat-toolbar class="charts-toolbar">
     <mat-toolbar-row class="charts-toolbar-row">
       <span class="charts-text">Tweets to Charts</span>
+      <a href="/" class="home-link">Home</a>
       <span class="charts-user">@{{username}}</span>
     </mat-toolbar-row>
   </mat-toolbar>

@@ -141,3 +141,10 @@ blockquote.twitter-tweet a:focus {
     bottom: 0;
     right: 0;
   }
+
+  .home-link {
+    margin-left: 40%;
+    text-decoration: none;
+    color: aliceblue;
+  }
+  
