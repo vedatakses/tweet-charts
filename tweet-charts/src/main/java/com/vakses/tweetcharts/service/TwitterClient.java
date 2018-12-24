@@ -49,7 +49,7 @@ public class TwitterClient {
         this.userProfileRepository = userProfileRepository;
     }
 
-    @Scheduled(fixedDelayString = "86400000")
+    //@Scheduled(fixedDelayString = "86400000")
     public void searchPopularUserProfiles() {
         if (isDailyJobAlreadyProcessed()) {
             return;
@@ -99,7 +99,6 @@ public class TwitterClient {
         return dateFormat.format(date);
     }
 
-    // TODO : write stored profiles to the file (user_profile.csv)
     public UserProfile getUserProfile(final String username) {
         TwitterProfile twitterProfile = twitter.userOperations().getUserProfile(username);
         int tweetCount = twitterProfile.getStatusesCount();
